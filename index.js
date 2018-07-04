@@ -26,6 +26,7 @@ const app = express()
 
 const whitelist = [
   'http://localhost:3000',
+  'http://localhost:8080',
   'https://lessthanthree.games',
   'https://www.lessthanthree.games'
 ]
