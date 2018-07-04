@@ -7,4 +7,4 @@ COPY . $APP
 
 RUN apk update && apk add yarn && yarn && npm i -g nodemon
 
-CMD ["yarn", "start"]
+CMD ["yarn", "prod"]

@@ -23,11 +23,27 @@ mongoose.connect(config.mongodbServer + config.mongodbDatabase)
 const PORT = 3000
 
 const app = express()
-app.use(cors())
+
+const whitelist = [
+  'http://localhost:3000',
+  'https://lessthanthree.games',
+  'https://www.lessthanthree.games'
+]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 // bodyParser is needed just for POST.
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema, context: { Game, User } }))
+app.use('/graphql', cors(corsOptions), bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema, context: { Game, User } }))
 
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+if (process.env.NODE_ENV === 'development') {
+  app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+}
 
 app.listen(PORT)
