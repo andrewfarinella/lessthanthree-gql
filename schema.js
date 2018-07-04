@@ -2,7 +2,14 @@ export default `
 type User {
   _id: ID!
   email: String!
-  password: String!
+  first_name: String
+  last_name: String
+}
+
+input UserInput {
+  email: String!
+  first_name: String
+  last_name: String
 }
 
 type Vote {
@@ -46,7 +53,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(email: String!): User!,
+  createUser(user: UserInput!): User!,
   createGame(name: String!, ratings: [RatingInput]): Game!,
   updateGame(id: ID!, name: String): Game!,
   addGameRating(id: ID!, rating: RatingInput!): Game!

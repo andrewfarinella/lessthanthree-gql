@@ -37,7 +37,7 @@ export default {
   },
   Mutation: {
     createUser: async (parent, args, { User }) => {
-      const user = await new User(args).save()
+      const user = await new User(args.user).save()
 
       return user
     },
