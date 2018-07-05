@@ -40,7 +40,6 @@ export default {
   },
   Mutation: {
     createUser: async (parent, args, req) => {
-      if (!req.user) return null
       const user = await new models.User(args.user).save()
 
       return user
