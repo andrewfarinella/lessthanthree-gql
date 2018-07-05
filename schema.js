@@ -1,12 +1,15 @@
 export default `
 type User {
   _id: ID!
+  sub: String!
   email: String!
   first_name: String
   last_name: String
+  capabilities: [String]!
 }
 
 input UserInput {
+  sub: String!
   email: String!
   first_name: String
   last_name: String
@@ -53,11 +56,11 @@ type Query {
 }
 
 type Mutation {
-  createUser(user: UserInput!): User!,
-  createGame(name: String!, ratings: [RatingInput]): Game!,
-  updateGame(id: ID!, name: String): Game!,
-  addGameRating(id: ID!, rating: RatingInput!): Game!
-  addRatingVote(gameId: ID!, ratingId: ID!, vote: VoteInput!): Game!
-  removeRatingVote(gameId: ID!, ratingId: ID!, voteId: ID!): Game!
+  createUser(user: UserInput!): User,
+  createGame(name: String!, ratings: [RatingInput]): Game,
+  updateGame(id: ID!, name: String): Game,
+  addGameRating(id: ID!, rating: RatingInput!): Game
+  addRatingVote(gameId: ID!, ratingId: ID!, vote: VoteInput!): Game
+  removeRatingVote(gameId: ID!, ratingId: ID!, voteId: ID!): Game
 }
 `
