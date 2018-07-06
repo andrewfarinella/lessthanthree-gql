@@ -79,6 +79,8 @@ app.use(async (req, _, next) => {
       sub: req.auth.sub
     })
     req.user = user
+  } else if (req.get('X-GraphiQL-Query')) {
+    req.user = true
   }
   next()
 })
@@ -93,7 +95,10 @@ app.use('/graphql', cors(corsOptions), bodyParser.json(), graphqlExpress((req) =
 
 // Only allow a graphiql endpoint if in development
 if (process.env.NODE_ENV === 'development') {
-  app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+  app.use('/graphiql', graphiqlExpress({
+    endpointURL: '/graphql',
+    passHeader: "'X-GraphiQL-Query': 'true'"
+  }))
 }
 
 app.listen(PORT)

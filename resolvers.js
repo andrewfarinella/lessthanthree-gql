@@ -18,7 +18,6 @@ export default {
     },
 
     games: async (parent, args, req) => {
-      console.log(req.user)
       const games = await models.Game.find().sort({'name': 1}).populate('ratings.votes.user')
       return games
     },
@@ -64,7 +63,7 @@ export default {
     },
     updateGame: async (parent, args, req) => {
       if (!req.user) return null
-      const game = await models.Game.findByIdAndUpdate(args.id, args.game)
+      const game = await models.Game.findByIdAndUpdate(args.id, args.game, { new: true }).populate('ratings.votes.user')
       game._id = game._id.toString()
       return game
     },

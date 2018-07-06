@@ -46,6 +46,11 @@ type Game {
   ratings: [Rating]!
 }
 
+input GameInput {
+  name: String
+  banner: String
+}
+
 type Query {
   user(id: ID!): User
   userByEmail(email: String!): User
@@ -59,7 +64,7 @@ type Query {
 type Mutation {
   createUser(user: UserInput!): User,
   createGame(name: String!, ratings: [RatingInput]): Game,
-  updateGame(id: ID!, name: String): Game,
+  updateGame(id: ID!, game: GameInput): Game,
   addGameRating(id: ID!, rating: RatingInput!): Game
   addRatingVote(gameId: ID!, ratingId: ID!, vote: VoteInput!): Game
   removeRatingVote(gameId: ID!, ratingId: ID!, voteId: ID!): Game
