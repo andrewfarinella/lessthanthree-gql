@@ -5,7 +5,7 @@ type User {
   email: String!
   first_name: String
   last_name: String
-  capabilities: [String]!
+  role: String!
 }
 
 input UserInput {
@@ -13,6 +13,7 @@ input UserInput {
   email: String!
   first_name: String
   last_name: String
+  role: String
 }
 
 type Vote {
