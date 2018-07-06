@@ -3,8 +3,10 @@ type User {
   _id: ID!
   sub: String!
   email: String!
+  name: String
   first_name: String
   last_name: String
+  picture: String
   role: String!
 }
 
@@ -59,6 +61,8 @@ type Query {
   game(id: ID!): Game
 
   gameByVote(id: ID!): Game
+
+  votesByUser(id: ID!): [Game]
 }
 
 type Mutation {
@@ -66,7 +70,7 @@ type Mutation {
   createGame(name: String!, ratings: [RatingInput]): Game,
   updateGame(id: ID!, game: GameInput): Game,
   addGameRating(id: ID!, rating: RatingInput!): Game
-  addRatingVote(gameId: ID!, ratingId: ID!, vote: VoteInput!): Game
-  removeRatingVote(gameId: ID!, ratingId: ID!, voteId: ID!): Game
+  addRatingVote(ratingId: ID!, vote: VoteInput!): Game
+  removeRatingVote(ratingId: ID!, voteId: ID!): Game
 }
 `
