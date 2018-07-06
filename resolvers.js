@@ -111,6 +111,7 @@ export default {
       if (!req.user) return null
       const ratingArgs = {
         name: args.rating.name,
+        value: args.rating.value,
         votes: [
           {
             user: req.user._id,
